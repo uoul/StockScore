@@ -110,9 +110,9 @@ const ResultTab = ({ tournament }: { tournament: Tournament }) => {
         <div className="print-container" ref={printContentRef}> 
             <div className="w-full flex justify-between print:mb-12 print:mt-8">
                 <div></div>
-                <div className="flex flex-col items-center">
+                <div className="flex-col items-center hidden print:flex">
                     <span className="text-xl print:text-3xl">Ergebnis {tournament.Name}</span>
-                    <span className="flex items-center gap-2 text-sm text-base-content/70 mt-1 mb-4">
+                    <span className="items-center gap-2 text-sm text-base-content/70 mt-1 mb-4 flex">
                         <DateIcon className="size-3.5 fill-neutral/60" />
                         {new Date(tournament.Date).toLocaleDateString("de-DE", {
                             weekday: "long",
@@ -131,7 +131,5 @@ const ResultTab = ({ tournament }: { tournament: Tournament }) => {
             <Table cols={colTemplate} rows={standings} />
         </div>
     )
-
-
 }
 export default ResultTab

@@ -12,7 +12,7 @@ const App = () => {
   const { activeTournament } = useTournamentStore()
 
   return (
-    <div className="grid grid-cols-[auto_1fr] touch-manipulation gap-3 p-3 overflow-hidden h-screen bg-base-200">
+    <div className="grid grid-cols-[auto_1fr] touch-manipulation p-3 overflow-hidden h-screen bg-base-200">
       <AppBar />
       <SideNav />
       <div className="overflow-y-auto bg-base-100 rounded-xl [box-shadow:0_0_8px_2px_rgba(0,0,0,0.15)]">

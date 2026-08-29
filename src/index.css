@@ -44,20 +44,27 @@
     margin: 1cm;
   }
 
-  /* Make the table fill the printable width */
+  body {
+    -webkit-print-color-adjust: exact;  /* Farben erhalten */
+    print-color-adjust: exact;
+  }
+
   table {
     width: 100% !important;
     table-layout: auto !important;
-    font-size: 10pt;           /* smaller font for print */
+    font-size: 10pt;
   }
 
   th, td {
-    white-space: nowrap;        /* or "normal" if you want wrapping */
+    white-space: nowrap;
     padding: 2px 4px;
   }
 
-  /* If your table is wider than the page, scale it down */
-  body {
-    zoom: 0.8;                  /* simple fallback */
+  /* Safari Print-Bug Override — HIER deine print: Utilities */
+  .print\:hidden {
+    display: none;
+  }
+  .print\:block {
+    display: block;
   }
 }

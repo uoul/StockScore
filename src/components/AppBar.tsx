@@ -48,7 +48,7 @@ const AppBar = () => {
     }, [tournaments])
 
     return (
-        <div className="col-span-2">
+        <div className="col-span-2 mb-3">
             <input type="file" accept=".json" ref={fileInputRef} onChange={importFile} className="hidden" />
             <div className="navbar bg-base-100 [box-shadow:0_0_8px_2px_rgba(0,0,0,0.15)] rounded-2xl gap-2">
                 <div className="flex-none ml-1">
