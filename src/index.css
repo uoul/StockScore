@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+
+@plugin "daisyui/theme" {
+  name: "fantasy";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.003 247.858);
+  --color-base-200: oklch(96% 0.007 247.896);
+  --color-base-300: oklch(92% 0.013 255.508);
+  --color-base-content: oklch(20% 0.042 265.755);
+  --color-primary: rgb(124 66 84);
+  --color-primary-content: rgb(255 255 255);
+  --color-secondary: rgb(58 100 107);
+  --color-secondary-content: rgb(255 255 255);
+  --color-accent: oklch(60% 0.126 221.723);
+  --color-accent-content: oklch(100% 0 0);
+  --color-neutral: oklch(37% 0.044 257.287);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(58% 0.158 241.966);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(64% 0.2 131.684);
+  --color-success-content: oklch(98% 0.031 120.757);
+  --color-warning: oklch(76% 0.188 70.08);
+  --color-warning-content: oklch(98% 0.016 73.684);
+  --color-error: oklch(51% 0.222 16.935);
+  --color-error-content: oklch(97% 0.014 343.198);
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
+
+  /* Make the table fill the printable width */
+  table {
+    width: 100% !important;
+    table-layout: auto !important;
+    font-size: 10pt;           /* smaller font for print */
+  }
+
+  th, td {
+    white-space: nowrap;        /* or "normal" if you want wrapping */
+    padding: 2px 4px;
+  }
+
+  /* If your table is wider than the page, scale it down */
+  body {
+    zoom: 0.8;                  /* simple fallback */
+  }
+}
