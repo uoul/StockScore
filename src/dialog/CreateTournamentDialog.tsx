@@ -3,6 +3,7 @@ import { DEFAULT_TOURNAMENT, type Tournament } from "../domain/Tournament"
 import useDialog from "../hooks/useDialog"
 import useNotification from "../hooks/useNotification"
 import { useTournamentStore } from "../hooks/useTournamentStore"
+import {v4 as uuidv4} from 'uuid';
 
 const CreateTournamentDialog = () => {
     const { closeDialog } = useDialog()
@@ -21,6 +22,7 @@ const CreateTournamentDialog = () => {
     const handleSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault();
         try {
+            tournament.Id = uuidv4()
             await createTournament(tournament)
             await refreshTournaments()
         } finally {

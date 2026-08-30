@@ -51,7 +51,7 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
 
             {/* Grid-Layout */}
             {(() => {
-                const gridCols = '18px 18px 18px 18px repeat(6, 25px) 30px 30px 1fr repeat(6, 25px) 30px 30px';
+                const gridCols = '18px 18px 18px 18px repeat(6, 30px) 35px 1fr repeat(6, 30px) 35px';
 
                 // Feinere Border: border statt border
                 const cellBase = 'border border-black flex items-center justify-center text-[11px] box-border';
@@ -72,7 +72,6 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                 <div key={`e-${k}`} className={cellBase}>{k}</div>
                             ))}
                             <div className={cellBase}>Su</div>
-                            <div className={cellBase}>Pu</div>
 
                             <div className="border border-black px-2 flex items-center text-left text-[11px] font-bold">
                                 Mannschaft
@@ -82,7 +81,6 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                 <div key={`g-${k}`} className={cellBase}>{k}</div>
                             ))}
                             <div className={cellBase}>Su</div>
-                            <div className={cellBase}>Pu</div>
                         </div>
 
                         {/* Body-Zeilen */}
@@ -98,14 +96,12 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                         <div className="border border-black" style={{ gridColumn: '2 / span 3' }}></div>
                                         <div className="border border-black" style={{ gridColumn: '5 / span 6' }}></div>
                                         <div className="border border-black"></div>
-                                        <div className="border border-black"></div>
                                         <div className="border border-black px-2 flex items-center justify-center font-bold tracking-widest bg-gray-50 text-xs">
                                             PAUSE
                                         </div>
                                         {[1, 2, 3, 4, 5, 6].map((_, i) => (
                                             <div key={`p-gk-${i}`} className="border border-black"></div>
                                         ))}
-                                        <div className="border border-black"></div>
                                         <div className="border border-black"></div>
                                     </div>
                                 );
@@ -127,7 +123,6 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                         <div key={`ek-${i}`} className="border border-black"></div>
                                     ))}
                                     <div className="border border-black"></div>
-                                    <div className="border border-black"></div>
 
                                     {/* Gegner Name */}
                                     <div className="border border-black px-2 flex items-center text-left font-medium text-xs truncate">
@@ -138,7 +133,6 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                     {row.kehrenGegner?.map((_, i) => (
                                         <div key={`gk-${i}`} className="border border-black"></div>
                                     ))}
-                                    <div className="border border-black"></div>
                                     <div className="border border-black"></div>
                                 </div>
                             );
@@ -153,9 +147,6 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                 <div>{new Date(tournament.Date).toLocaleDateString('de-DE')}</div>
             </div>
         </div>
-
-
-
     )
 };
 

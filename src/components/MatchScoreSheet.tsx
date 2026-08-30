@@ -4,7 +4,7 @@ import type { Team } from "../domain/Team";
 const MatchScoreSheet = ({ match }: { match: Match }) => {
   const renderTeamSection = (team: Team, opponentTeam: Team) => {
     return (
-      <div className="grid grid-rows-[auto_auto_2.5rem_2.5rem_3rem] border-r border-black last:border-r-0">
+      <div className="grid grid-rows-[auto_auto_2.5rem_3rem] border-r border-black last:border-r-0">
         {/* Header mit Team-Name und BibNumber */}
         <div className="grid grid-cols-[1fr_1fr] border-b border-black text-sm">
           <div className="p-2 text-center tracking-wider bg-gray-50 flex items-center justify-center">
@@ -33,23 +33,10 @@ const MatchScoreSheet = ({ match }: { match: Match }) => {
           <div></div>
         </div>
 
-        {/* Zeile mit Strichen "-" */}
-        <div className="grid grid-cols-[repeat(7,1fr)] border-b border-black text-center text-gray-400 text-sm">
-          {[1, 2, 3, 4, 5, 6].map((col) => (
-            <div key={col} className="border-r border-black last:border-r-0 flex items-center justify-center">
-              -
-            </div>
-          ))}
-          <div className="flex items-center justify-center"></div>
-        </div>
-
         {/* Unterschriften- & Summenfeld */}
-        <div className="grid grid-cols-[1fr_1fr] border-b border-black">
-          <div className="p-2 text-[10px] text-gray-500 flex items-end">
+        <div className="grid grid-cols-7 border-b border-black">
+          <div className="p-2 text-[10px] text-gray-500 flex items-end col-span-6">
             Unterschrift {opponentTeam.Name}
-          </div>
-          <div className="border-l border-black flex items-center justify-center text-lg font-bold">
-            =
           </div>
         </div>
       </div>

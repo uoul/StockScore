@@ -1,4 +1,3 @@
-import {v4 as uuidv4} from 'uuid';
 import type { Result } from "./Result"
 import type { Team } from "./Team"
 
@@ -13,7 +12,7 @@ export interface Tournament {
 }
 
 export const DEFAULT_TOURNAMENT: Tournament = {
-    Id: uuidv4(),
+    Id: "",
     Courts: 1,
     Date: new Date(),
     Name: "",
