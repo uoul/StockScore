@@ -60,10 +60,10 @@
     padding: 2px 4px;
   }
 
-  /* Safari Print-Bug Override — HIER deine print: Utilities */
   .print\:hidden {
     display: none;
   }
+  
   .print\:block {
     display: block;
   }

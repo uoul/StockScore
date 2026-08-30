@@ -20,7 +20,7 @@ const ActiveTournament = ({ tournament }: { tournament: Tournament }) => {
     const isFinished = useMemo(() => playedGames >= totalGames && totalGames > 0, [playedGames, totalGames])
 
     const printContentRef = useRef<HTMLDivElement>(null)
-    const print = useReactToPrint({ documentTitle: `Vorbereitung_${tournament.Name}`, contentRef: printContentRef });
+    const print = useReactToPrint({ documentTitle: `Vorbereitung_${tournament.Name}`, contentRef: printContentRef, preserveAfterPrint: true });
 
     const matches = useMemo<Match[]>(() => {
         const uniqueTeams = [...new Map(tournament.Teams.map(t => [t.Id, t])).values()]
