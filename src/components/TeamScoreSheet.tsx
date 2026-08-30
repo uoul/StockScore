@@ -30,6 +30,7 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                 isPause: false as const,
                 court: match.Court,
                 opponent,
+                kickoff: match.Kickoff,
                 kehrenEigene: ['', '', '', '', '', ''],
                 kehrenGegner: ['', '', '', '', '', ''],
             };
@@ -45,7 +46,7 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
             {/* Kopfzeile */}
             <div className="border-b border-black pb-2 mb-2 flex justify-between items-end">
                 <h2 className="text-xl font-bold tracking-wide flex items-center gap-2">
-                    <span className="p-1 m-1 rounded-lg text-sm border border border-black text-center">#{team.BibNumber}</span>{team.Name}
+                    <span className="p-1 m-1 rounded-lg text-sm border border-black text-center">#{team.BibNumber}</span>{team.Name}
                 </h2>
             </div>
 
@@ -93,16 +94,10 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                         style={{ gridTemplateColumns: gridCols }}
                                     >
                                         <div className={`${cellBase} font-bold`}>{row.round}</div>
-                                        <div className="border border-black" style={{ gridColumn: '2 / span 3' }}></div>
-                                        <div className="border border-black" style={{ gridColumn: '5 / span 6' }}></div>
-                                        <div className="border border-black"></div>
-                                        <div className="border border-black px-2 flex items-center justify-center font-bold tracking-widest bg-gray-50 text-xs">
+                           
+                                        <div className="col-span-18 border border-black px-2 flex items-center justify-center font-bold tracking-widest bg-gray-50 text-xs">
                                             PAUSE
                                         </div>
-                                        {[1, 2, 3, 4, 5, 6].map((_, i) => (
-                                            <div key={`p-gk-${i}`} className="border border-black"></div>
-                                        ))}
-                                        <div className="border border-black"></div>
                                     </div>
                                 );
                             }
@@ -116,7 +111,7 @@ const TeamScoreSheet = ({ teamId, tournament, matches }: { teamId: string, tourn
                                     <div className={`${cellBase} font-semibold`}>{row.round}</div>
                                     <div className={cellBase}>{row.court}</div>
                                     <div className={cellBase}>{row.opponent?.BibNumber}</div>
-                                    <div className={cellBase}>{team.BibNumber}</div>
+                                    <div className={cellBase}>{row.kickoff}</div>
 
                                     {/* Eigene Kehren 1-6 */}
                                     {row.kehrenEigene?.map((_, i) => (

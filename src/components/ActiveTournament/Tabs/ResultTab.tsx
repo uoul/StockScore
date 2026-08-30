@@ -21,7 +21,7 @@ interface StandingsRow {
 const ResultTab = ({ tournament }: { tournament: Tournament }) => {
 
     const printContentRef = useRef<HTMLDivElement>(null)
-    const print = useReactToPrint({ documentTitle: `Ergebnis_${tournament.Name}`, contentRef: printContentRef });
+    const print = useReactToPrint({ documentTitle: `Ergebnis_${tournament.Name}`, contentRef: printContentRef, preserveAfterPrint: true });
 
     const standings = useMemo(() => {
         const standings = new Map<string, StandingsRow>()

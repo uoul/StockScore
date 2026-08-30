@@ -6,14 +6,10 @@ const MatchScoreSheet = ({ match }: { match: Match }) => {
     return (
       <div className="grid grid-rows-[auto_auto_2.5rem_3rem] border-r border-black last:border-r-0">
         {/* Header mit Team-Name und BibNumber */}
-        <div className="grid grid-cols-[1fr_1fr] border-b border-black text-sm">
-          <div className="p-2 text-center tracking-wider bg-gray-50 flex items-center justify-center">
-            {team.Name}
-          </div>
-          <div className="border-l border-black p-2 text-center flex items-center justify-center bg-gray-50">
-            {team.BibNumber}
-          </div>
+        <div className="p-2 tracking-wider bg-gray-50 flex items-center gap-2 border-b">
+          <span className="p-1 rounded-lg text-xs border border-black text-center">#{team.BibNumber}</span>{team.Name}
         </div>
+
 
         {/* Durchgänge Header (1 bis 6 + Summe) */}
         <div className="grid grid-cols-[repeat(7,1fr)] border-b border-black text-xs font-medium text-center bg-gray-100">
@@ -53,31 +49,21 @@ const MatchScoreSheet = ({ match }: { match: Match }) => {
       </div>
 
       {/* Fußzeile mit Metadaten */}
-      <div className="grid grid-cols-2 text-xs font-semibold bg-white">
+      <div className="grid grid-cols-[auto_auto_auto_1fr] text-xs font-semibold bg-white border-t-0">
         {/* Links: Bahn + Anspiel – alle Spalten 1fr statt fixe rem */}
-        <div className="grid grid-cols-[1fr_1fr_1fr_1fr] border-r border-black">
-          <div className="border-r border-black py-2 px-3 flex items-center justify-center bg-gray-50">
-            Bahn
-          </div>
-          <div className="py-2 px-3 flex items-center justify-center text-sm font-bold">
-            {match.Court}
-          </div>
-          <div className="border-x border-black py-2 px-3 flex items-center justify-center bg-gray-50">
-            Anspiel
-          </div>
-          <div className="py-2 px-3 flex items-center justify-center text-sm font-bold">
-            {match.Kickoff}
-          </div>
+
+        <div className="border-r border-black py-2 px-3 flex items-center justify-center bg-gray-50">
+          Durchgang {match.Round}
+        </div>
+        <div className="border-r border-black py-2 px-3 flex items-center justify-center bg-gray-50">
+          Bahn {match.Court}
         </div>
 
-        {/* Rechts: Durchgang */}
-        <div className="grid grid-cols-[1fr_1fr]">
-          <div className="border-r border-black py-2 px-3 flex items-center justify-center bg-gray-50">
-            Durchgang
-          </div>
-          <div className="py-2 px-3 flex items-center justify-center text-sm font-bold">
-            {match.Round}
-          </div>
+        <div className="border-x border-black py-2 px-3 flex items-center justify-center bg-gray-50">
+          Anspiel
+        </div>
+        <div className="py-2 px-3 flex items-center text-sm gap-2">
+          <span className="p-1 rounded-lg text-xs border border-black text-center font-thin">#{match.Kickoff}</span>{match.Team1.BibNumber === match.Kickoff ? match.Team1.Name : match.Team2.BibNumber === match.Kickoff ? match.Team2.Name : "ERROR"}
         </div>
       </div>
     </div>
