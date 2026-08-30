@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import type { Match } from "../../domain/Match"
 
-const MatchCard = ({match, p1, p2, onResultChange}: {match: Match, p1?: number, p2?: number, onResultChange?: (p1?: number, p2?: number) => void}) => {
+const MatchCard = ({ match, p1, p2, onResultChange }: { match: Match, p1?: number, p2?: number, onResultChange?: (p1?: number, p2?: number) => void }) => {
     const [points1, setPoints1] = useState<number | ''>(p1 ?? '')
     const [points2, setPoints2] = useState<number | ''>(p2 ?? '')
 
@@ -9,6 +9,13 @@ const MatchCard = ({match, p1, p2, onResultChange}: {match: Match, p1?: number, 
     const winnerId = useMemo(() => hasResult && points1 !== points2 ? (points1 > points2 ? match.Team1.Id : match.Team2.Id) : null, [hasResult, points1, points2])
     const isUndecided = useMemo(() => hasResult && points1 === points2, [hasResult, points1, points2])
 
+    useEffect(() => {
+        setPoints1(p1 ?? '')
+    }, [p1])
+
+    useEffect(() => {
+        setPoints2(p2 ?? '')
+    }, [p2])
 
     const handlePoints1 = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value) || 0)
@@ -23,8 +30,8 @@ const MatchCard = ({match, p1, p2, onResultChange}: {match: Match, p1?: number, 
     }
 
     const getResultIcon = useCallback((teamId: string) => {
-        if(teamId === winnerId) return "🥇 "
-        if(isUndecided) return "⚖️ "
+        if (teamId === winnerId) return "🥇 "
+        if (isUndecided) return "⚖️ "
         return ""
     }, [winnerId, isUndecided])
 
@@ -59,7 +66,7 @@ const MatchCard = ({match, p1, p2, onResultChange}: {match: Match, p1?: number, 
                 <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                         <span className="badge badge-secondary badge-xs shrink-0">{match.Team2.BibNumber}</span>
-                        <span className={`truncate font-medium ${winnerId === match.Team2.Id ? 'text-success' : isUndecided ? 'text-info': ''}`}>
+                        <span className={`truncate font-medium ${winnerId === match.Team2.Id ? 'text-success' : isUndecided ? 'text-info' : ''}`}>
                             {getResultIcon(match.Team2.Id)}{match.Team2.Name}
                         </span>
                     </div>
