@@ -1,75 +1,79 @@
-# React + TypeScript + Vite
+Here is the updated README with the GPL-3.0 license:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# StockScore – Tournament Software for Stocksport
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**StockScore** is a Progressive Web App (PWA) for managing and running Stocksport tournaments. It runs entirely in the browser and is fully offline-capable – ideal for sports venues without a reliable internet connection.
 
-## React Compiler
+Live version: [https://stockscore.uoul.net/](https://stockscore.uoul.net/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Tournament Management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Create tournament – name, number of courts, date
+- Run tournament – schedule, results, tables
+- Delete tournament – remove tournaments no longer needed
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Import / Export
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Export tournaments as JSON files (backup / transfer)
+- Import JSON files (restoration / device migration)
 
-```
+### Per Tournament
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+| Area | Description |
+|---|---|
+| Manage teams | Add, edit, and delete teams |
+| Generate schedule | Automatic creation of the match schedule based on number of teams and courts |
+| Maintain results | Enter and correct match results per fixture |
+| Results table | Live standings with current ranking of all teams |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Printouts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The following printouts can be generated directly from the app:
 
-```
+- **Court strips** – overview of fixtures per court
+- **Team strips** – overview of fixtures per team
+- **Results list** – final ranking of the tournament
+
+The print functions use the browser's built-in print capability and can be sent to any local printer.
+
+---
+
+## Offline Capability
+
+StockScore is implemented as a Progressive Web App (PWA):
+
+- Service Workers cache all resources – the app works without an internet connection after a single initial load
+- Web App Manifest – install on the home screen (smartphone/tablet) or as a desktop app
+- Local storage – all tournament data is stored in the browser (no server, no cloud required)
+- No dependency on external services
+
+### Installation as an App
+
+1. Open StockScore in the browser
+2. Open the browser menu and select "Add to Home Screen" (Android) or "Install" (Chrome/Edge)
+3. The app now launches standalone like a native application
+
+---
+
+## Technology Stack
+
+| Component | Technology |
+|---|---|
+| App type | Progressive Web App (PWA) |
+| Offline caching | Service Worker / Cache API |
+| Data storage | Browser storage (IndexedDB / LocalStorage) |
+| Import/Export | JSON |
+| Print output | Browser print function (`window.print()`) |
+| Backend | none – entirely client-side |
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
+
+You are free to use, modify, and distribute this software, provided that any distributed copies or derivative works are also licensed under GPL-3.0 and include the corresponding source code. See the [full license text](https://www.gnu.org/licenses/gpl-3.0.html) for details.
