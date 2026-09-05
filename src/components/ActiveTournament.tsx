@@ -121,26 +121,35 @@ const ActiveTournament = ({ tournament }: { tournament: Tournament }) => {
     return (
         <div className="flex flex-col w-full p-2 md:p-8 gap-2">
             {/* Header */}
-            <div className="w-full flex justify-between p-6 md:p-0">
-                <div className="flex flex-col">
-                    <span className="text-3xl text-base-content/60">{tournament.Name}</span>
-                    <span className="flex items-center gap-2 text-sm text-base-content/70 mt-1 mb-4">
-                        <DateIcon className="size-3.5 fill-neutral/60" />
-                        {new Date(tournament.Date).toLocaleDateString("de-DE", {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "2-digit",
-                        })}
-                    </span>
-                </div>
-                <div className="flex gap-2">
-                    <TournamentBadge isStarted={isStarted} isFinished={isFinished} />
-                    <button className="btn btn-square btn-soft print:hidden btn-sm" onClick={print}>
-                        <PrintIcon className="h-6" />
-                    </button>
-                </div>
-            </div>
+            <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 py-5 md:px-6 md:py-6">
+    <div className="flex min-w-0 flex-col">
+        <span className="truncate text-2xl sm:text-3xl text-base-content/60">
+            {tournament.Name}
+        </span>
+        <span className="flex items-center gap-2 text-sm text-base-content/70 mt-1">
+            <DateIcon className="size-3.5 shrink-0 fill-neutral/60" />
+            <span>
+                {new Date(tournament.Date).toLocaleDateString("de-DE", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                })}
+            </span>
+        </span>
+    </div>
+    <div className="flex w-full items-center justify-between gap-2 md:w-auto md:justify-end">
+        <TournamentBadge isStarted={isStarted} isFinished={isFinished} />
+        <button
+            className="btn btn-square btn-soft print:hidden btn-sm"
+            onClick={print}
+            aria-label="Drucken"
+        >
+            <PrintIcon className="h-6" />
+        </button>
+    </div>
+</div>
+
 
             {/* Status */}
             <TournamentState tournament={tournament} />

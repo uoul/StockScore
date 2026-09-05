@@ -22,7 +22,7 @@ const TournamentState = ({ tournament }: { tournament: Tournament }) => {
   );
 
   return (
-    <div className="stats stats-vertical sm:stats-horizontal shadow w-full [box-shadow:0_0_8px_2px_rgba(0,0,0,0.1)]">
+    <div className="stats stats-vertical sm:stats-horizontal shadow w-full [box-shadow:0_0_8px_2px_rgba(0,0,0,0.1)] grid grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr_1fr_1fr]">
       <div className="stat">
         <div className="stat-title">Teams</div>
         <div className="stat-value text-primary">{tournament.Teams.length}</div>
