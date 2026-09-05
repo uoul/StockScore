@@ -85,7 +85,7 @@ const ScheduleTab = ({ tournament, matches }: { tournament: Tournament, matches:
                         </div>
 
                         <div className="collapse-content">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                                 {roundMatches.map((m, i) => {
                                     const r = getResult(tournament.Results, m)
                                     return <MatchCard key={i} match={m} p1={r?.PointsTeam1} p2={r?.PointsTeam2} onResultChange={(p1, p2) => setResult(m, String(p1), String(p2))} />

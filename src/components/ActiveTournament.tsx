@@ -119,9 +119,9 @@ const ActiveTournament = ({ tournament }: { tournament: Tournament }) => {
     }, [tournament.Teams, tournament.Courts])
 
     return (
-        <div className="flex flex-col w-full p-8 gap-2">
+        <div className="flex flex-col w-full p-2 md:p-8 gap-2">
             {/* Header */}
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between p-6 md:p-0">
                 <div className="flex flex-col">
                     <span className="text-3xl text-base-content/60">{tournament.Name}</span>
                     <span className="flex items-center gap-2 text-sm text-base-content/70 mt-1 mb-4">

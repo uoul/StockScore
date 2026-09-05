@@ -6,6 +6,7 @@ import Table from "../../Table"
 import PrintIcon from "../../../assets/PrintIcon"
 import DateIcon from "../../../assets/DateIcon"
 import { useReactToPrint } from "react-to-print"
+import useMinWidth from "../../../hooks/useMinWidth"
 
 interface StandingsRow {
     Team: Team
@@ -18,8 +19,36 @@ interface StandingsRow {
     Quote: number
 }
 
+const cols: Column<StandingsRow>[] = [
+    {
+        name: "Rang",
+        renderCell: (_, index) => index + 1,
+    },
+    {
+        name: "Team",
+        renderCell: s => s.Team.Name,
+    },
+    {
+        name: "Spiele",
+        renderCell: s => s.Spiele
+    },
+    {
+        name: "Punkte",
+        renderCell: s => `${s.Gewonnen * 2 + s.Unentschieden} : ${s.Verloren * 2 + s.Unentschieden}`
+    },
+    {
+        name: "Stockpunkte",
+        renderCell: s => `${s.StockpunkteGewonnen} : ${s.StockpunkteVerloren}`
+    },
+    {
+        name: "Quote",
+        renderCell: s => s.Quote.toFixed(3)
+    }
+]
+
 const ResultTab = ({ tournament }: { tournament: Tournament }) => {
 
+    const isSm = useMinWidth("sm")
     const printContentRef = useRef<HTMLDivElement>(null)
     const print = useReactToPrint({ documentTitle: `Ergebnis_${tournament.Name}`, contentRef: printContentRef, preserveAfterPrint: true });
 
@@ -78,39 +107,16 @@ const ResultTab = ({ tournament }: { tournament: Tournament }) => {
         return rows
     }, [tournament.Teams, tournament.Results])
 
-    const colTemplate: Column<StandingsRow>[] = useMemo(() => [
-        {
-            name: "Rang",
-            renderCell: (_, index) => index + 1,
-        },
-        {
-            name: "Team",
-            renderCell: s => s.Team.Name,
-        },
-        {
-            name: "Spiele",
-            renderCell: s => s.Spiele
-        },
-        {
-            name: "Punkte",
-            renderCell: s => `${s.Gewonnen * 2 + s.Unentschieden} : ${s.Verloren * 2 + s.Unentschieden}`
-        },
-        {
-            name: "Stockpunkte",
-            renderCell: s => `${s.StockpunkteGewonnen} : ${s.StockpunkteVerloren}`
-        },
-        {
-            name: "Quote",
-            renderCell: s => s.Quote.toFixed(3)
-        }
-
-    ], [standings])
+    const colTemplate: Column<StandingsRow>[] = useMemo(() => {
+        if (!isSm) return cols.filter(c => c.name !== "Spiele" && c.name !== "Stockpunkte")
+        return cols
+    }, [standings, isSm])
 
     return (
-        <div className="print-container" ref={printContentRef}> 
+        <div className="print-container" ref={printContentRef}>
             <div className="w-full flex justify-between print:mb-12 print:mt-8">
                 <div></div>
-                <div className="flex-col items-center hidden print:flex">
+                <div className="w-full flex-col items-center hidden print:flex">
                     <span className="text-xl print:text-3xl">Ergebnis {tournament.Name}</span>
                     <span className="items-center gap-2 text-sm text-base-content/70 mt-1 mb-4 flex">
                         <DateIcon className="size-3.5 fill-neutral/60" />
@@ -121,6 +127,7 @@ const ResultTab = ({ tournament }: { tournament: Tournament }) => {
                             day: "2-digit",
                         })}
                     </span>
+                    <Table className="w-full" cols={cols} rows={standings} />
                 </div>
                 <div>
                     <button className="btn btn-sm btn-square btn-soft print:hidden" onClick={print}>
@@ -128,7 +135,7 @@ const ResultTab = ({ tournament }: { tournament: Tournament }) => {
                     </button>
                 </div>
             </div>
-            <Table cols={colTemplate} rows={standings} />
+            <Table className="print:hidden" cols={colTemplate} rows={standings} />
         </div>
     )
 }
